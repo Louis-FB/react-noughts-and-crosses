@@ -47,11 +47,10 @@ function App() {
     for (let i = 0; i < patterns.length; ++i) {
       if (!squares[patterns[i][0]]) continue;
 
-      if (
-        squares[patterns[i][0]] == squares[patterns[i][1]] &&
-        squares[patterns[i][0]] == squares[patterns[i][2]]
-      ) {
-        setWinner(squares[patterns[i][0]]);
+      const [a, b, c] = patterns[i];
+
+      if (squares[a] == squares[b] && squares[a] == squares[c]) {
+        setWinner(squares[a]);
         return;
       }
     }
