@@ -13,7 +13,7 @@ function App() {
   const markBoard = (id) => {
     if (squares[id] || winner) return;
 
-    const updatedSquares = [...squares]; // duplicate to fill
+    const updatedSquares = [...squares];
 
     if (xTurn) {
       updatedSquares[id] = "X";
@@ -23,9 +23,6 @@ function App() {
 
     setXTurn(!xTurn);
     setSquares(updatedSquares);
-    //checkWin();
-
-    // check win
   };
 
   const resetBoard = () => {
@@ -36,35 +33,25 @@ function App() {
   };
 
   const checkWin = () => {
-    console.log(squares);
-    // array of win patterns // loop over
     const patterns = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 4, 8],
-      [2, 4, 6],
+      [0, 1, 2], // row 1
+      [3, 4, 5], // row 2
+      [6, 7, 8], // row 3
+      [0, 3, 6], // col 1
+      [1, 4, 7], // col 2
+      [2, 5, 8], // col 3
+      [0, 4, 8], // diagonal right
+      [2, 4, 6], // diagonal left
     ];
 
     for (let i = 0; i < patterns.length; ++i) {
-      console.log(
-        `Pattern ${i}\nsquare 1: ${squares[patterns[i][0]]} square 2: ${
-          squares[patterns[i][1]]
-        } square 3: ${squares[patterns[i][2]]}`
-      );
-      if (!squares[patterns[i][1]]) {
-        console.log("No match");
-        continue;
-      }
+      if (!squares[patterns[i][0]]) continue;
 
       if (
         squares[patterns[i][0]] == squares[patterns[i][1]] &&
         squares[patterns[i][0]] == squares[patterns[i][2]]
       ) {
-        setWinner(squares[i][0]);
-        // console.log(
-        //   `Matched. Winner is ${winner} value (${squares[patterns[i][0]]})`
-        // );
+        setWinner(squares[patterns[i][0]]);
         return;
       }
     }
@@ -72,7 +59,6 @@ function App() {
 
   useEffect(() => {
     checkWin();
-    console.log("Use effecting");
   }, [squares]);
 
   return (
@@ -99,7 +85,7 @@ function App() {
           )}
         </div>
       </div>
-      {winner ? <p>{winner} won!</p> : <p>No winner</p>}
+      {winner ? <p>{winner} won!</p> : ""}
       <Footer onReset={resetBoard} />
     </>
   );
