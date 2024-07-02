@@ -49,7 +49,7 @@ function App() {
 
       const [a, b, c] = patterns[i];
 
-      if (squares[a] == squares[b] && squares[a] == squares[c]) {
+      if (squares[a] === squares[b] && squares[a] === squares[c]) {
         setWinner(squares[a]);
         return;
       }
