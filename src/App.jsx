@@ -85,8 +85,20 @@ function App() {
           )}
         </div>
       </div>
-      {winner ? <p>{winner} won!</p> : ""}
-      <Footer onReset={resetBoard} />
+      {winner ? (
+        <div className="mid-section">
+          <div className="victory">
+            <p>
+              <strong>{winner}</strong> won!
+            </p>
+            <button onClick={() => resetBoard()} className="victory-btn">
+              Play again
+            </button>
+          </div>
+        </div>
+      ) : (
+        <Footer onReset={resetBoard} />
+      )}
     </>
   );
 }
